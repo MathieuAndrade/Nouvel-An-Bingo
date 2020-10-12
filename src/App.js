@@ -1,26 +1,32 @@
 import React from 'react';
-import logo from './logo.svg';
+import {Button, Typography, PageHeader} from 'antd';
 import './App.css';
 
+import Home from "./Home/Home";
+
+const {Title} = Typography;
+
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <div>
+            <header>
+                <PageHeader
+                    className="site-page-header"
+                    title="Nouvel an Bingo"
+                    extra={[
+                        <Button disabled={true} key="1">Nouvelle partie</Button>,
+                    ]}
+                />
+            </header>
+            <div className="content">
+                <div className="text-info">Un bingo mais avec des phrases de gens chiant ;) (mais on les aiment bien
+                    quand même)
+                </div>
+                <Title level={5}>Phrases disponibles :</Title>
+                <Home/>
+            </div>
+        </div>
+    );
 }
 
 export default App;
