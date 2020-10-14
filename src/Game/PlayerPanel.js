@@ -1,9 +1,10 @@
 import React from 'react';
-import { Button, Tabs,  PageHeader } from 'antd';
+import {Button, Tabs, PageHeader, Typography} from 'antd';
 
-const { TabPane } = Tabs;
+const {Title} = Typography;
+const {TabPane} = Tabs;
 
-function Game() {
+function PlayerPanel() {
     return (
         <div>
             <header>
@@ -15,15 +16,18 @@ function Game() {
                     ]}
                     footer={
                         <Tabs defaultActiveKey="1">
-                            <TabPane tab="Grille 1" key="2" />
-                            <TabPane tab="Grille 2" key="3" />
-                            <TabPane tab="Grille 3" key="4" />
+                            <TabPane tab="Grille 1" key="2"/>
+                            <TabPane tab="Grille 2" key="3"/>
+                            <TabPane tab="Grille 3" key="4"/>
                         </Tabs>
                     }
                 />
             </header>
+            <div className="content">
+                <Title level={5}>Joueurs connectés</Title>
+            </div>
         </div>
     );
 }
 
-export default Game;
+export default PlayerPanel;

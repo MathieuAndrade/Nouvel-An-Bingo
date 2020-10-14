@@ -13,10 +13,13 @@
     "express": "^4.17.1",
     "morgan": "^1.10.0",
     "react": "^16.13.1",
+    "react-cookie": "^4.0.3",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.3"
+    "react-scripts": "3.4.3",
+    "uuid": "^8.3.1"
   },
   "scripts": {
+    "serve": "concurrently \"serve -s build -l 3000\" \"cd ./server && node index.js\"",
     "start": "concurrently \"yarn start-client\" \"yarn start-server\"",
     "start-client": "react-scripts start",
     "start-server": "cd ./server && nodemon index.js",

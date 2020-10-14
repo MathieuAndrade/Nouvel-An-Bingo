@@ -1,45 +1,32 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import People from "./People";
-import {Button} from "antd";
+import {Button, PageHeader, Typography} from "antd";
 
-function Home() {
-    const [data, setData] = useState([]);
+const {Title} = Typography;
 
-    const addSentence = (name, sentence) => {
-        data.map(people => {
-            if (people.name === name) {
-                people.sentences.push(sentence);
-            }
-        })
-
-        try {
-            fetch(`http://${window.location.hostname}:5000/write`, {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            });
-        } catch (e) {
-            console.log(e)
-        }
-
-    }
-
-    useEffect(() => {
-        fetch(`http://${window.location.hostname}:5000/read`)
-            .then(response => response.json())
-            .then(data => setData(data));
-    }, []);
-
+function Home({showAddPlayerModal, data, addSentence}) {
     return (
         <div>
-            {
-                data.map(people =>
-                    <People key={people.name} addSentence={addSentence} people={people}/>
-                )
-            }
+            <header>
+                <PageHeader
+                    className="site-page-header"
+                    title="Nouvel an Bingo"
+                    extra={<Button onClick={() => showAddPlayerModal(true)} key="new_game">Nouvelle partie</Button>}
+                />
+            </header>
+            <div className="content">
+                <div className="text-info">Un bingo mais avec des phrases de gens chiant ;) (mais on les aiment bien
+                    quand même)
+                </div>
+                <Title level={5}>Phrases disponibles :</Title>
+
+                {
+                    data.map(people =>
+                         <People key={people.name} addSentence={addSentence} people={people}/>
+                    )
+                }
+
+            </div>
         </div>
     )
 }
