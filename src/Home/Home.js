@@ -4,14 +4,15 @@ import {Button, PageHeader, Typography} from "antd";
 
 const {Title} = Typography;
 
-function Home({showAddPlayerModal, data, addSentence}) {
+function Home({showAddPlayerModal, inGame, data, addSentence}) {
+    const text = inGame ? "Rejoindre la partie" : "Nouvelle partie"
     return (
         <div>
             <header>
                 <PageHeader
                     className="site-page-header"
                     title="Nouvel an Bingo"
-                    extra={<Button onClick={() => showAddPlayerModal(true)} key="new_game">Nouvelle partie</Button>}
+                    extra={<Button onClick={() => showAddPlayerModal(true)} key="new_game"> {text} </Button>}
                 />
             </header>
             <div className="content">

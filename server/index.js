@@ -30,7 +30,7 @@ app.get('/', (req, res) => res.status(200).send({message: 'Hello world'}));
 // Read route
 app.get('/read', (req, res) => {
     try {
-        fs.readFile('../sentences.json', (err, data) => {
+        fs.readFile('../data.json', (err, data) => {
             if (err) throw err;
             let result = JSON.parse(data);
             return res.status(200).send(result);
@@ -43,7 +43,7 @@ app.get('/read', (req, res) => {
 // Write route
 app.post('/write', async (req, res) => {
     try {
-        fs.writeFile("../sentences.json", JSON.stringify(req.body), (err) => {
+        fs.writeFile("../data.json", JSON.stringify(req.body), (err) => {
             if (err) throw err;
             console.log("The file was saved!");
         });
