@@ -6,6 +6,7 @@ import './App.css';
 import Home from "./Home/Home";
 import Game from "./Game/Game";
 import NewPlayer from "./Game/NewPlayer";
+import Notification from "./Components/Notification";
 import {getData, saveData} from "./utils/api";
 
 const initialState = {
@@ -16,6 +17,8 @@ const initialState = {
     peoples: [],
     data: []
 }
+
+const PeopleAlreadyExistNotif = () => Notification('error', 'Pas de bol :(', 'Cette personne existe déjà')
 
 function App() {
     const [state, setState] = useState(initialState);
@@ -50,6 +53,20 @@ function App() {
         saveData({peoples: newState.peoples, data: newState.data}).catch((e) => console.log(e))
     }
 
+    const addNewPeople = (_, name) => {
+        const newState = {...state};
+        newState.data.map(people => {
+            if(people.name.toLowerCase().trim() === name.toLowerCase().trim()) {
+                PeopleAlreadyExistNotif();
+                throw Error;
+            } else {
+                return people;
+            }
+        })
+        newState.data.push({name, sentences: []})
+        setState(newState);
+    }
+
     useEffect( () => {
         getData()
             .then(result => {
@@ -76,7 +93,7 @@ function App() {
             {
                 state.game
                 ? <Game showAddPlayerModal={setVisible} cookie={cookies}/>
-                : <Home showAddPlayerModal={setVisible} inGame={state.gameStarted} data={state.data} addSentence={addSentence}/>
+                : <Home showAddPlayerModal={setVisible} inGame={state.gameStarted} data={state.data} addSentence={addSentence} addNewPeople={addNewPeople}/>
             }
 
             <NewPlayer visible={state.modalVisible} showAddPlayerModal={setVisible} addPlayer={addPlayer} peoples={state.peoples}/>

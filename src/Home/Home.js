@@ -1,10 +1,12 @@
-import React from "react";
+import React, {useState} from "react";
 import People from "./People";
 import {Button, PageHeader, Typography} from "antd";
+import newForm from "./NewForm";
 
 const {Title} = Typography;
 
-function Home({showAddPlayerModal, inGame, data, addSentence}) {
+function Home({showAddPlayerModal, inGame, data, addSentence, addNewPeople}) {
+    const [editing, setEditing] = useState(false);
     const text = inGame ? "Rejoindre la partie" : "Nouvelle partie"
     return (
         <div>
@@ -26,6 +28,13 @@ function Home({showAddPlayerModal, inGame, data, addSentence}) {
                          <People key={people.name} addSentence={addSentence} people={people}/>
                     )
                 }
+
+                {editing
+                    ? newForm({name: '', setEditing, cb: addNewPeople})
+                    : <Button type="default" shape="round" onClick={() => setEditing(true)}>Ajouter une personne</Button>
+                }
+                <br/>
+                <br/>
 
             </div>
         </div>

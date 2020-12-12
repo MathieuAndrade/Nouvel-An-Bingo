@@ -1,29 +1,9 @@
 import React, {useState} from "react";
-import {Button, Form, List, Input} from "antd";
+import {Button, List} from "antd";
+import newForm from './NewForm'
 
 const buttonNew = ({setEditing}) => (
     <Button type="primary" shape="round" onClick={() => setEditing(true)}>Ajouter une phrase</Button>
-)
-
-const newSentence = ({name, setEditing, addSentence}) => (
-    <Form
-        name="new_sentence"
-        onFinish={({sentence}) => {
-            if (sentence && sentence !== "" && sentence.trim() !== "") {
-                addSentence(name, sentence)
-            }
-            setEditing(false)
-        }}
-    >
-        <Form.Item name="sentence">
-            <Input placeholder="Tapez votre phrase ici"/>
-        </Form.Item>
-        <Form.Item>
-            <Button type="primary" shape="round" htmlType="submit">
-                Ajouter
-            </Button>
-        </Form.Item>
-    </Form>
 )
 
 function People({people, addSentence}) {
@@ -33,11 +13,12 @@ function People({people, addSentence}) {
             <List
                 size="small"
                 header={<div><b>{people.name}</b></div>}
-                footer={editing ? newSentence({name: people.name, setEditing, addSentence}) : buttonNew({setEditing})}
+                footer={editing ? newForm({name: people.name, setEditing, cb: addSentence}) : buttonNew({setEditing})}
                 bordered
                 dataSource={people.sentences}
                 renderItem={item => <List.Item>{item}</List.Item>}
             />
+            <br />
         </div>
     )
 }
