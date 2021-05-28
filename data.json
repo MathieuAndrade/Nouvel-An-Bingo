@@ -13,6 +13,46 @@
       ]
     }
   ],
-  "players": [],
-  "gameStarted": false
+  "players": [
+    {
+      "username": "Moi",
+      "peoplesSelected": [
+        "Sarah"
+      ],
+      "uuid": "96718d8e-7a7d-49bd-b337-84995bc93fe2"
+    },
+    {
+      "username": "test",
+      "peoplesSelected": [
+        "Sarah"
+      ],
+      "uuid": "72af2280-e44c-4196-aa4c-5a46788f4dc1"
+    },
+    {
+      "username": "Je",
+      "peoplesSelected": [
+        "Sarah"
+      ],
+      "uuid": "78e380d0-7dd0-491e-bd5a-874697c4f6d1"
+    },
+    {
+      "username": "test",
+      "peoplesSelected": [
+        "Sarah"
+      ],
+      "uuid": "4804b750-6bf1-46e0-95ab-928302098eab",
+      "grids": [
+        [
+          "Le pouleeeeet !",
+          "Vous cassez les couilles",
+          "azeazeaze",
+          "J'ai faim"
+        ]
+      ],
+      "gridsNames": [
+        "Sarah"
+      ]
+    }
+  ],
+  "gameStarted": true
 }

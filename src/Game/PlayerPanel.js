@@ -1,30 +1,39 @@
 import React from 'react';
-import {Button, Tabs, PageHeader, Typography} from 'antd';
+import {Button, Tabs, PageHeader} from 'antd';
+import {usePlayerGame} from "../utils/hooks";
+import PlayerGrid from './PlayerGrid'
 
-const {Title} = Typography;
 const {TabPane} = Tabs;
 
-function PlayerPanel() {
+function PlayerPanel({player, data}) {
+    const [state] = usePlayerGame(player, data);
+    console.log(state)
+
+    const onChange = (e, index, i) => {
+        console.log(state.grids[index][i])
+        console.log(e.target.checked);
+    }
+
     return (
         <div>
             <header>
                 <PageHeader
-                    className="site-page-header"
-                    title="Joueur 1"
+                    title={player.username}
                     extra={[
                         <Button key="1">Nouvelle grille</Button>,
                     ]}
-                    footer={
-                        <Tabs defaultActiveKey="1">
-                            <TabPane tab="Grille 1" key="2"/>
-                            <TabPane tab="Grille 2" key="3"/>
-                            <TabPane tab="Grille 3" key="4"/>
-                        </Tabs>
-                    }
                 />
             </header>
-            <div className="content">
-                <Title level={5}>Joueurs connectés</Title>
+            <div className="mt-20">
+                <Tabs defaultActiveKey="1">
+                    {
+                        state.gridsNames.map((value, index) =>
+                            <TabPane tab={value} key={index}>
+                                <PlayerGrid data={state.grids[index]} index={index} cb={onChange}/>
+                            </TabPane>
+                        )
+                    }
+                </Tabs>
             </div>
         </div>
     );

@@ -1,18 +1,18 @@
 import React from 'react';
-import {Button, PageHeader} from 'antd';
+import {PageHeader} from 'antd';
 
-function Game({showAddPlayerModal}) {
+import PlayerPanel from "./PlayerPanel";
+
+function Game({cookie, data}) {
     return (
         <div>
             <header>
                 <PageHeader
                     className="site-page-header"
                     title="Partie en cours"
-                    extra={[
-                        <Button key="join_game" onClick={() => showAddPlayerModal(true)}>Rejoindre la partie</Button>,
-                    ]}
                 />
             </header>
+            <PlayerPanel player={cookie['nouvel-an-bingo']} data={data}/>
         </div>
     );
 }

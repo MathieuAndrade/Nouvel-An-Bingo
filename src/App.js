@@ -92,7 +92,7 @@ function App() {
         <div>
             {
                 state.game
-                ? <Game showAddPlayerModal={setVisible} cookie={cookies}/>
+                ? <Game cookie={cookies} data={state}/>
                 : <Home showAddPlayerModal={setVisible} inGame={state.gameStarted} data={state.data} addSentence={addSentence} addNewPeople={addNewPeople}/>
             }
 
